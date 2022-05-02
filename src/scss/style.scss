@@ -1,0 +1,12 @@
+$base-color: #c6538c;
+
+body {
+	background-color: $base-color;
+}
+
+#root {
+		background-color: $base-color !important;
+		h1 {
+			color: white;
+		}
+}
