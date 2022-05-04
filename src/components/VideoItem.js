@@ -6,10 +6,10 @@ function VideoItem({ video, selectVideo }) {
 		<div className="video__item item" onClick={() =>selectVideo(video)}>
             <div className="content">
                 <div className="header">
-                    <h4>{video.title}</h4>
+                    <h4>{video.snippet.title}</h4>
                 </div>
             </div>
-            <img className="ui image" src={video.thumbnails.default.url} />
+            <img className="ui image" src={video.snippet.thumbnails.default.url} />
 		</div>
 	);
 }

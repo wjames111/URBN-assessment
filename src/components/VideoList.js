@@ -6,7 +6,7 @@ import { selectedVideo } from '../actions/videos';
 function VideoList({ isLoading, allVideos, selectVideo }) {
 
     const renderVideoItem = allVideos.map((video) => {
-        return <VideoItem video={video.snippet} selectVideo={selectVideo}/>;
+        return <VideoItem key={video.id} video={video} selectVideo={selectVideo}/>;
     });
 
     const noVideosMsg = 'Please search for a term to show related videos.';

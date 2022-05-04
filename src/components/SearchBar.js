@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getVideosRequest } from '../thunks/youtubeApi';
 import { setSearchTerm, setSearchCount, setSearchSafety } from '../actions/videos';
 
-function SearchBar({ searchTerm, searchCount, searchSafety, isLoading, updateSearchTerm, updateSearchCount, updateSearchSafety, getVideos }) {
+function SearchBar({ searchTerm, searchCount, searchSafety, isLoading, updateSearchTerm, updateSearchCount, updateSearchSafety, getVideos, allVideos }) {
     const videoCountValues = [5, 10, 25, 50];
     const videoSafetyValues = ['moderate', 'none', 'strict'];
+    const initialSearchTerm = 'deer';
 
     function onFormSubmit(e) {
         e.preventDefault();
         getVideos(searchTerm, searchCount, searchSafety);
     }
+
+    useEffect(() => {
+        if (!allVideos.length) {
+            getVideos(searchTerm = initialSearchTerm, searchCount, searchSafety);
+        }
+    }, []);
 
 	return (
 		<div className="search-bar ui segment">
@@ -48,6 +55,7 @@ const mapStateToProps = state => ({
     searchCount: state.videos.searchCount,
     searchSafety: state.videos.searchSafety,
     isLoading: state.videos.isLoading,
+    allVideos: state.videos.allVideos,
 });
 
 const mapDispatchToProps = dispatch => ({
