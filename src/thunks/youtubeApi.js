@@ -13,13 +13,11 @@ export const getVideosRequest = (term, count, safety) => async dispatch => {
                 key: API_KEY,
                 q: term,
                 safeSearch: safety,
-            }
+            },
         });
-        console.log('youtube videos', response.data.items);
-        dispatch(getVideos(response.data.items)); //change name
+        dispatch(getVideos(response.data.items)); // Change name
         dispatch(setLoading(false));
     } catch (error) {
-        console.log(error);
         dispatch(setLoading(false));
     }
 };

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import VideoDetails from './VideoDetails';
 import { selectVideo } from '../actions/videos';
 
-function RenderVideo({ currentVideo }){
+function RenderVideo({ currentVideo }) {
     return (
         <main>
             <h1 className="ui header">{currentVideo.snippet.title}</h1>
@@ -17,11 +17,12 @@ function RenderVideo({ currentVideo }){
     );
 }
 
-function CurrentVideo({ currentVideo, allVideos, searchCount, selectVideo }) {
-
+function CurrentVideo({
+ currentVideo, allVideos, searchCount, selectVideo,
+}) {
     useEffect(() => {
         // Choose a default current video when no video has been chosen
-        if (Object.keys(currentVideo).length === 0){
+        if (Object.keys(currentVideo).length === 0) {
             // Get random number from within list of videos
             const randomVideo = Math.floor(Math.random() * (searchCount + 1));
             selectVideo(allVideos[randomVideo]);
@@ -29,10 +30,10 @@ function CurrentVideo({ currentVideo, allVideos, searchCount, selectVideo }) {
     }, []);
 
     return (
-        <div className="featured-video__container">      
-            { 
+        <div className="featured-video__container">
+            {
                 // make sure currentVideo has a value before rendering it
-                (Object.keys(currentVideo).length === 0) ? 'Please select a video' : <RenderVideo currentVideo={currentVideo} /> 
+                (Object.keys(currentVideo).length === 0) ? 'Please select a video' : <RenderVideo currentVideo={currentVideo} />
             }
         </div>
     );

@@ -2,17 +2,19 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import '../scss/search-bar.scss';
 import { getVideosRequest } from '../thunks/youtubeApi';
-import { 
-    setSearchTerm, 
-    setSearchCount, 
-    setSearchSafety 
+import {
+    setSearchTerm,
+    setSearchCount,
+    setSearchSafety,
     } from '../actions/videos';
 
 function SearchBar(props) {
-    const { searchTerm, searchCount, searchSafety, setSearchTerm, setSearchCount, setSearchSafety, getVideos, allVideos } = props;
+    const {
+ searchTerm, searchCount, searchSafety, setSearchTerm, setSearchCount, setSearchSafety, getVideos, allVideos,
+} = props;
     const videoCountValues = [5, 10, 25, 50]; // Set video count values to loop through later
     const videoSafetyValues = ['moderate', 'none', 'strict']; // Set safety values to loop through later
-    const initialSearchTerm = 'deer'; // Set default seach here so search input isn't controlled by it 
+    const initialSearchTerm = 'deer'; // Set default seach here so search input isn't controlled by it
 
     function onFormSubmit(e) {
         e.preventDefault();
@@ -30,40 +32,46 @@ function SearchBar(props) {
 		<div className="search-bar__container ui segment">
             <form id="searchForm" onSubmit={(e) => onFormSubmit(e)}>
                 <div className="search-bar__content ui action input">
-                    <label>Search</label>
-                    <input 
-                        className="search-bar__input prompt"
-                        type="text" 
-                        placeholder="Search Videos..."
-                        value={searchTerm} 
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    <label>Page Quantity</label>
-                    <select 
-                        className="ui compact selection dropdown"
-                        name="video-count" 
-                        value={searchCount} 
-                        onChange={(e) => setSearchCount(e.target.value)}
-                    >
-                    {
-                        videoCountValues.map((val) => <option key={val} value={val}>{val}</option> )
-                    }
-                    </select>
-                    <label>Safe Search</label>
-                    <select 
-                        className="ui compact selection dropdown"
-                        name="video-safety" 
-                        value={searchSafety} 
-                        onChange={(e) => setSearchSafety(e.target.value)}
-                    >
-                    {
-                        videoSafetyValues.map((val) => <option key={val} value={val}>{val}</option> )
-                    }
-                    </select>
+                    <label htmlFor="videoSearch">
+                        <input
+                            className="search-bar__input prompt"
+                            id="videoSearch"
+                            type="text"
+                            placeholder="Search Videos..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </label>
+                    <label htmlFor="videoCount">
+                        <select
+                            className="ui compact selection dropdown"
+                            id="videoCount"
+                            name="video-count"
+                            value={searchCount}
+                            onChange={(e) => setSearchCount(e.target.value)}
+                        >
+                        {
+                            videoCountValues.map((val) => <option key={val} value={val}>{val}</option>)
+                        }
+                        </select>
+                    </label>
+                    <label htmlFor="videoSafety">
+                        <select
+                            className="ui compact selection dropdown"
+                            id="videoSafety"
+                            name="video-safety"
+                            value={searchSafety}
+                            onChange={(e) => setSearchSafety(e.target.value)}
+                        >
+                        {
+                            videoSafetyValues.map((val) => <option key={val} value={val}>{val}</option>)
+                        }
+                        </select>
+                    </label>
                     <button className="ui button" type="submit" form="searchForm" value="Submit">Submit</button>
                 </div>
             </form>
-        </div>
+  </div>
 	);
 }
 

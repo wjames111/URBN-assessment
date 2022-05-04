@@ -3,7 +3,7 @@ import '../scss/video-item.scss';
 
 function VideoItem({ video, selectVideo }) {
 	return (
-		<div className="video__item item" onClick={() => selectVideo(video)}>
+		<div role="button" className="video__item item" onClick={() => selectVideo(video)} onKeyDown={() => selectVideo(video)}>
             <img alt={video.snippet.title} className="ui image" src={video.snippet.thumbnails.default.url} />
             <div className="content">
                 <div className="header">

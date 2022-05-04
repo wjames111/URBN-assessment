@@ -4,25 +4,23 @@ import VideoItem from './VideoItem';
 import { selectVideo } from '../actions/videos';
 
 function VideoList({ isLoading, allVideos, selectVideo }) {
-
-    const renderVideoItem = allVideos.map((video, i) => {
-        // Using index here for key, video.id had a duplicate
-        return <VideoItem key={i} video={video} selectVideo={selectVideo}/>;
-    });
-
+    // Using index here for key, video.id had a duplicate
+    const renderVideoItem = allVideos.map((video, i) => <VideoItem key={i} video={video} selectVideo={selectVideo} />);
     const videoListErrMsg = 'Please search for a term to show related videos.';
 
 	return (
 		<div>
-            { 
-                isLoading ? 
-                <div className="ui active inverted dimmer">
-                    <div className="ui text loader">Loading</div>
-                </div> : 
-                null 
+            {
+                isLoading
+                ? (
+                    <div className="ui active inverted dimmer">
+                        <div className="ui text loader">Loading</div>
+                    </div>
+                )
+                : null
             }
             <div className="ui relaxed divided list">
-                {/* Confirm video list has been recieved before rendering them */} 
+                {/* Confirm video list has been recieved before rendering them */}
                 { allVideos ? renderVideoItem : videoListErrMsg }
             </div>
 		</div>

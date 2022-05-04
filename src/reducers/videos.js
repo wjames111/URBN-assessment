@@ -4,7 +4,7 @@ import {
     SET_SEARCH_COUNT,
     SET_SEARCH_SAFETY,
     GET_VIDEOS,
-    SELECT_VIDEO
+    SELECT_VIDEO,
 } from '../actions/videos';
 
 const initialState = {
