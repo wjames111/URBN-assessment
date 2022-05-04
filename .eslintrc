@@ -25,5 +25,9 @@
     "no-shadow": "off",
     "react/no-array-index-key": "off",
     "jsx-a11y/interactive-supports-focus": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-closing-tag-location": "off",
+    "object-curly-newline": "off",
+    "operator-linebreak": "off"
   }
 }

@@ -11,13 +11,13 @@ function VideoList({ isLoading, allVideos, selectVideo }) {
 	return (
 		<div>
             {
-                isLoading
-                ? (
+                isLoading ?
+                (
                     <div className="ui active inverted dimmer">
                         <div className="ui text loader">Loading</div>
                     </div>
-                )
-                : null
+                ) :
+                null
             }
             <div className="ui relaxed divided list">
                 {/* Confirm video list has been recieved before rendering them */}

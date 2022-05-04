@@ -10,8 +10,15 @@ import {
 
 function SearchBar(props) {
     const {
- searchTerm, searchCount, searchSafety, setSearchTerm, setSearchCount, setSearchSafety, getVideos, allVideos,
-} = props;
+        searchTerm,
+        searchCount,
+        searchSafety,
+        setSearchTerm,
+        setSearchCount,
+        setSearchSafety,
+        getVideos,
+        allVideos,
+            } = props;
     const videoCountValues = [5, 10, 25, 50]; // Set video count values to loop through later
     const videoSafetyValues = ['moderate', 'none', 'strict']; // Set safety values to loop through later
     const initialSearchTerm = 'deer'; // Set default seach here so search input isn't controlled by it
@@ -42,7 +49,7 @@ function SearchBar(props) {
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </label>
-                    <label htmlFor="videoCount">
+                    <label htmlFor="videoCount" className="ui action input">
                         <select
                             className="ui compact selection dropdown"
                             id="videoCount"
@@ -55,7 +62,7 @@ function SearchBar(props) {
                         }
                         </select>
                     </label>
-                    <label htmlFor="videoSafety">
+                    <label htmlFor="videoSafety" className="ui action input">
                         <select
                             className="ui compact selection dropdown"
                             id="videoSafety"
@@ -71,7 +78,7 @@ function SearchBar(props) {
                     <button className="ui button" type="submit" form="searchForm" value="Submit">Submit</button>
                 </div>
             </form>
-  </div>
+        </div>
 	);
 }
 

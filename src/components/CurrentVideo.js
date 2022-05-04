@@ -17,9 +17,7 @@ function RenderVideo({ currentVideo }) {
     );
 }
 
-function CurrentVideo({
- currentVideo, allVideos, searchCount, selectVideo,
-}) {
+function CurrentVideo({ currentVideo, allVideos, searchCount, selectVideo }) {
     useEffect(() => {
         // Choose a default current video when no video has been chosen
         if (Object.keys(currentVideo).length === 0) {
