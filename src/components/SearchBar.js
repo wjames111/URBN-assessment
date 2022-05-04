@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getVideosRequest } from '../thunks/youtubeApi';
-import { setSearchTerm, setSearchCount } from '../actions/videos';
+import { setSearchTerm, setSearchCount, setSearchSafety } from '../actions/videos';
 
-function SearchBar({ searchTerm, searchCount, isLoading, getVideos, updateSearchTerm, updateSearchCount }) {
-    const videoCount = [5, 10, 25, 50];
+function SearchBar({ searchTerm, searchCount, searchSafety, isLoading, updateSearchTerm, updateSearchCount, updateSearchSafety, getVideos }) {
+    const videoCountValues = [5, 10, 25, 50];
+    const videoSafetyValues = ['moderate', 'none', 'strict'];
 
     function onFormSubmit(e) {
         e.preventDefault();
-        getVideos(searchTerm, searchCount);
+        getVideos(searchTerm, searchCount, searchSafety);
     }
 
 	return (
-		<div>
-            <form id="searchForm" onSubmit={(e) => onFormSubmit(e)}>
-                <div>
+		<div className="search-bar ui segment">
+            <form id="searchForm"  className="ui form" onSubmit={(e) => onFormSubmit(e)}>
+                <div className="field">
                     <label>Video Search</label>
                     <input 
                         type="text" 
@@ -24,11 +25,17 @@ function SearchBar({ searchTerm, searchCount, isLoading, getVideos, updateSearch
                     <label>Number of Videos</label>
                     <select name="video-count" value={searchCount} onChange={(e) => updateSearchCount(e.target.value)}>
                     {
-                        videoCount.map((count) => <option value={count}>{count}</option> )
+                        videoCountValues.map((val) => <option key={val} value={val}>{val}</option> )
+                    }
+                    </select>
+                    <select name="video-safety" value={searchSafety} onChange={(e) => updateSearchSafety(e.target.value)}>
+                    {
+                        videoSafetyValues.map((val) => <option key={val} value={val}>{val}</option> )
                     }
                     </select>
                     <h1>{ isLoading ? 'Loading' : searchTerm }</h1>
                     <h1>{  searchCount }</h1>
+                    <h1>{  searchSafety }</h1>
                 </div>
             </form>
             <button type="submit" form="searchForm" value="Submit">Submit</button>
@@ -39,13 +46,15 @@ function SearchBar({ searchTerm, searchCount, isLoading, getVideos, updateSearch
 const mapStateToProps = state => ({
 	searchTerm: state.videos.searchTerm,
     searchCount: state.videos.searchCount,
+    searchSafety: state.videos.searchSafety,
     isLoading: state.videos.isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
     updateSearchTerm: (term) => dispatch(setSearchTerm(term)),
     updateSearchCount: (count) => dispatch(setSearchCount(count)),
-    getVideos: (term, count) => dispatch(getVideosRequest(term, count)),
+    updateSearchSafety: (safety) => dispatch(setSearchSafety(safety)),
+    getVideos: (term, count, safety) => dispatch(getVideosRequest(term, count, safety)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
