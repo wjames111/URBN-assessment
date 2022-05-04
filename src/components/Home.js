@@ -7,12 +7,10 @@ import CurrentVideo from './CurrentVideo';
 function Home({allVideos}) {
 	return (
 		<div>
-			<div>
-				<SearchBar />
-				{ allVideos.length ? <CurrentVideo /> : <h2>loading...</h2> }
-				<VideoList />
-			</div>
-			<h1>App is running!</h1>
+			<SearchBar />
+			// Keep CurrentVideo from rendering before recieving video list 
+			{ allVideos.length ? <CurrentVideo /> : <h2>loading...</h2> }
+			<VideoList />
 		</div>
 	);
 }

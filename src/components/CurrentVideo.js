@@ -1,23 +1,26 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../scss/current-video.scss';
 import VideoDetails from './VideoDetails';
-import { selectedVideo } from '../actions/videos';
+import { selectVideo } from '../actions/videos';
 
-function RenderVideo({videoSelected}){
+function RenderVideo({ currentVideo }){
     return (
         <div>
-            <h1>{videoSelected.snippet.title}</h1>
-            <iframe src={`https://www.youtube.com/embed/${videoSelected.id.videoId}`} />
-            <VideoDetails videoSelected={videoSelected} />
+            <h1>{currentVideo.snippet.title}</h1>
+            <iframe src={`https://www.youtube.com/embed/${currentVideo.id.videoId}`} />
+            <VideoDetails currentVideo={currentVideo} />
         </div>
     );
 }
 
-function CurrentVideo({ videoSelected, allVideos, searchCount, selectVideo }) {
+function CurrentVideo({ currentVideo, allVideos, searchCount, selectVideo }) {
 
     useEffect(() => {
-        if (Object.keys(videoSelected).length === 0){
+        // Choose a default current video when no video has been chosen
+        if (Object.keys(currentVideo).length === 0){
+            // Get random number from within list of videos
             const randomVideo = Math.floor(Math.random() * (searchCount + 1));
             selectVideo(allVideos[randomVideo]);
         }
@@ -25,19 +28,20 @@ function CurrentVideo({ videoSelected, allVideos, searchCount, selectVideo }) {
 
     return (
         <div>
-            { (Object.keys(videoSelected).length === 0) ? 'Please select a video' : <RenderVideo videoSelected={videoSelected} /> }
+            // make sure currentVideo has a value before rendering it
+            { (Object.keys(currentVideo).length === 0) ? 'Please select a video' : <RenderVideo currentVideo={currentVideo} /> }
         </div>
     )
 }
 
 const mapStateToProps = state => ({
-    videoSelected: state.videos.currentVideo,
+    currentVideo: state.videos.currentVideo,
     allVideos: state.videos.allVideos,
     searchCount: state.videos.searchCount,
 });
 
 const mapDispatchToProps = dispatch => ({
-    selectVideo: (video) => dispatch(selectedVideo(video)),
+    selectVideo: (video) => dispatch(selectVideo(video)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentVideo);

@@ -1,12 +1,13 @@
 import React from 'react';
 
-function VideoDetails({videoSelected}) {
-	const datePublished = new Date(videoSelected.snippet.publishTime).toString()
+function VideoDetails({ currentVideo }) {
+	const videoDetails = currentVideo.snippet;
+	const datePublished = new Date(videoDetails.publishTime).toString();
 	return (
 		<div className='video__description'>
-			<h4>Published: {datePublished}</h4>
-			<h4>Channel: {videoSelected.snippet.channelTitle}</h4>
-			<p>{videoSelected.snippet.description}</p>
+			<h4>Published: { datePublished }</h4>
+			<h4>Channel: { videoDetails.channelTitle }</h4>
+			<p>{ videoDetails.description }</p>
 		</div>
 	);
 }

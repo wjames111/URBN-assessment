@@ -1,4 +1,11 @@
-import { SET_LOADING, SET_SEARCH_TERM, SET_SEARCH_COUNT, SET_SEARCH_SAFETY, GET_VIDEOS, SELECTED_VIDEO } from '../actions/videos';
+import {
+    SET_LOADING,
+    SET_SEARCH_TERM,
+    SET_SEARCH_COUNT,
+    SET_SEARCH_SAFETY,
+    GET_VIDEOS,
+    SELECT_VIDEO
+} from '../actions/videos';
 
 const initialState = {
     isLoading: false,
@@ -52,7 +59,7 @@ export const videos = (state = initialState, action) => {
                     allVideos,
                 };
             }
-        case SELECTED_VIDEO:
+        case SELECT_VIDEO:
             {
                 const { video } = payload;
                 return {

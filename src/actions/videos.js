@@ -28,8 +28,8 @@ export const getVideos = (allVideos) => ({
     payload: { allVideos },
 });
 
-export const SELECTED_VIDEO = 'SELECTED_VIDEO';
-export const selectedVideo = (video) => ({
-    type: SELECTED_VIDEO,
+export const SELECT_VIDEO = 'SELECT_VIDEO';
+export const selectVideo = (video) => ({
+    type: SELECT_VIDEO,
     payload: { video },
 });

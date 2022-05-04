@@ -1,22 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import VideoItem from './VideoItem';
-import { selectedVideo } from '../actions/videos';
+import { selectVideo } from '../actions/videos';
 
 function VideoList({ isLoading, allVideos, selectVideo }) {
 
-    const renderVideoItem = allVideos.map((video) => {
-        return <VideoItem key={video.id} video={video} selectVideo={selectVideo}/>;
+    const renderVideoItem = allVideos.map((video, i) => {
+        // Using index here for key, video.id had a duplicate
+        return <VideoItem key={i} video={video} selectVideo={selectVideo}/>;
     });
 
-    const noVideosMsg = 'Please search for a term to show related videos.';
+    const videoListErrMsg = 'Please search for a term to show related videos.';
 
 	return (
 		<div>
 			<h1>Video List</h1>
-            <h2>{isLoading ? 'loading...' : 'not loading...'}</h2>
+            <h2>{ isLoading ? 'loading...' : 'not loading...' }</h2>
             <div className="ui relaxed divided list">
-                { allVideos ? renderVideoItem : noVideosMsg }
+                // Confirm video list has been recieved before rendering them
+                { allVideos ? renderVideoItem : videoListErrMsg }
             </div>
 		</div>
 	);
@@ -28,7 +30,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    selectVideo: (video) => dispatch(selectedVideo(video)),
+    selectVideo: (video) => dispatch(selectVideo(video)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoList);

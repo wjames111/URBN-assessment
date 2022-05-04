@@ -1,12 +1,17 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getVideosRequest } from '../thunks/youtubeApi';
-import { setSearchTerm, setSearchCount, setSearchSafety } from '../actions/videos';
+import { 
+    setSearchTerm, 
+    setSearchCount, 
+    setSearchSafety 
+    } from '../actions/videos';
 
-function SearchBar({ searchTerm, searchCount, searchSafety, isLoading, updateSearchTerm, updateSearchCount, updateSearchSafety, getVideos, allVideos }) {
-    const videoCountValues = [5, 10, 25, 50];
-    const videoSafetyValues = ['moderate', 'none', 'strict'];
-    const initialSearchTerm = 'deer';
+function SearchBar(props) {
+    const { searchTerm, searchCount, searchSafety, setSearchTerm, setSearchCount, setSearchSafety, getVideos, allVideos } = props;
+    const videoCountValues = [5, 10, 25, 50]; // Set video count values to loop through later
+    const videoSafetyValues = ['moderate', 'none', 'strict']; // Set safety values to loop through later
+    const initialSearchTerm = 'deer'; // Set default seach here so search input isn't controlled by it 
 
     function onFormSubmit(e) {
         e.preventDefault();
@@ -14,8 +19,9 @@ function SearchBar({ searchTerm, searchCount, searchSafety, isLoading, updateSea
     }
 
     useEffect(() => {
+        // Load a list of default videos
         if (!allVideos.length) {
-            getVideos(searchTerm = initialSearchTerm, searchCount, searchSafety);
+            getVideos(initialSearchTerm, searchCount, searchSafety);
         }
     }, []);
 
@@ -23,26 +29,32 @@ function SearchBar({ searchTerm, searchCount, searchSafety, isLoading, updateSea
 		<div className="search-bar ui segment">
             <form id="searchForm"  className="ui form" onSubmit={(e) => onFormSubmit(e)}>
                 <div className="field">
-                    <label>Video Search</label>
+                    <label>Search</label>
                     <input 
                         type="text" 
                         value={searchTerm} 
-                        onChange={(e) => updateSearchTerm(e.target.value)}
+                        onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    <label>Number of Videos</label>
-                    <select name="video-count" value={searchCount} onChange={(e) => updateSearchCount(e.target.value)}>
+                    <label>videos</label>
+                    <select 
+                        name="video-count" 
+                        value={searchCount} 
+                        onChange={(e) => setSearchCount(e.target.value)}
+                    >
                     {
                         videoCountValues.map((val) => <option key={val} value={val}>{val}</option> )
                     }
                     </select>
-                    <select name="video-safety" value={searchSafety} onChange={(e) => updateSearchSafety(e.target.value)}>
+                    <label>Safe Search</label>
+                    <select 
+                        name="video-safety" 
+                        value={searchSafety} 
+                        onChange={(e) => setSearchSafety(e.target.value)}
+                    >
                     {
                         videoSafetyValues.map((val) => <option key={val} value={val}>{val}</option> )
                     }
                     </select>
-                    <h1>{ isLoading ? 'Loading' : searchTerm }</h1>
-                    <h1>{  searchCount }</h1>
-                    <h1>{  searchSafety }</h1>
                 </div>
             </form>
             <button type="submit" form="searchForm" value="Submit">Submit</button>
@@ -54,14 +66,13 @@ const mapStateToProps = state => ({
 	searchTerm: state.videos.searchTerm,
     searchCount: state.videos.searchCount,
     searchSafety: state.videos.searchSafety,
-    isLoading: state.videos.isLoading,
     allVideos: state.videos.allVideos,
 });
 
 const mapDispatchToProps = dispatch => ({
-    updateSearchTerm: (term) => dispatch(setSearchTerm(term)),
-    updateSearchCount: (count) => dispatch(setSearchCount(count)),
-    updateSearchSafety: (safety) => dispatch(setSearchSafety(safety)),
+    setSearchTerm: (term) => dispatch(setSearchTerm(term)),
+    setSearchCount: (count) => dispatch(setSearchCount(count)),
+    setSearchSafety: (safety) => dispatch(setSearchSafety(safety)),
     getVideos: (term, count, safety) => dispatch(getVideosRequest(term, count, safety)),
 });
 
