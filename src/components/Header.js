@@ -1,9 +1,10 @@
 import React from 'react';
+import '../scss/header.scss';
 
 function Header() {
 	return (
-		<div>
-			<h1>Header</h1>
+		<div className="header__container ui container">
+			<h1>Youtube Videos</h1>
 		</div>
 	);
 }

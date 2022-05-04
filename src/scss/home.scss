@@ -1,0 +1,13 @@
+@import 'mixins';
+
+.page__column {
+    width: 95%;
+    margin: auto;
+    max-width: $lg-screen-size;
+    @include md-breakpoint {
+        width: 80%;
+    }
+    @include lg-breakpoint {
+        width: 70%;
+    }
+}

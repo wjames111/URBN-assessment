@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import '../scss/search-bar.scss';
 import { getVideosRequest } from '../thunks/youtubeApi';
 import { 
     setSearchTerm, 
@@ -26,17 +27,20 @@ function SearchBar(props) {
     }, []);
 
 	return (
-		<div className="search-bar ui segment">
-            <form id="searchForm"  className="ui form" onSubmit={(e) => onFormSubmit(e)}>
-                <div className="field">
+		<div className="search-bar__container ui segment">
+            <form id="searchForm" onSubmit={(e) => onFormSubmit(e)}>
+                <div className="search-bar__content ui action input">
                     <label>Search</label>
                     <input 
+                        className="search-bar__input prompt"
                         type="text" 
+                        placeholder="Search Videos..."
                         value={searchTerm} 
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    <label>videos</label>
+                    <label>Page Quantity</label>
                     <select 
+                        className="ui compact selection dropdown"
                         name="video-count" 
                         value={searchCount} 
                         onChange={(e) => setSearchCount(e.target.value)}
@@ -47,6 +51,7 @@ function SearchBar(props) {
                     </select>
                     <label>Safe Search</label>
                     <select 
+                        className="ui compact selection dropdown"
                         name="video-safety" 
                         value={searchSafety} 
                         onChange={(e) => setSearchSafety(e.target.value)}
@@ -55,9 +60,9 @@ function SearchBar(props) {
                         videoSafetyValues.map((val) => <option key={val} value={val}>{val}</option> )
                     }
                     </select>
+                    <button className="ui button" type="submit" form="searchForm" value="Submit">Submit</button>
                 </div>
             </form>
-            <button type="submit" form="searchForm" value="Submit">Submit</button>
         </div>
 	);
 }

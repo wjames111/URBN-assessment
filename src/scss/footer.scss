@@ -1,0 +1,8 @@
+@import 'variables';
+
+.footer__container.ui.container {
+	height: 10rem;
+	background-color: $color-grey;
+    margin-top: $spacer-medium;
+    border-radius: 0.25rem;
+}

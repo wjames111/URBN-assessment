@@ -1,0 +1,22 @@
+@import 'variables';
+
+// Small devices
+@mixin md-breakpoint {
+    @media (min-width: #{$md-screen-size}) {
+        @content;
+    }
+ }
+ 
+ // Medium devices
+ @mixin lg-breakpoint {
+    @media (min-width: #{$lg-screen-size}) {
+        @content;
+    }
+ }
+ 
+ // Large devices
+ @mixin xl-breakpoint {
+    @media (min-width: #{$xl-screen-size}) {
+        @content;
+    }
+ }

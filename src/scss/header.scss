@@ -1,0 +1,16 @@
+@import 'variables';
+
+.header__container.ui.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	height: 10rem;
+	background-color: $color-grey;
+    margin-bottom: $spacer-small;
+    border-radius: 0.25rem;
+    h1 {
+        color: $color-white;
+        font-size: 3rem;
+        letter-spacing: 0.1rem;
+    }
+}

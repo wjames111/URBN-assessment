@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import '../scss/current-video.scss';
 import VideoDetails from './VideoDetails';
 import { selectVideo } from '../actions/videos';
 
 function RenderVideo({ currentVideo }){
     return (
-        <div>
-            <h1>{currentVideo.snippet.title}</h1>
-            <iframe src={`https://www.youtube.com/embed/${currentVideo.id.videoId}`} />
+        <main>
+            <h1 className="ui header">{currentVideo.snippet.title}</h1>
+            <div className="video__wrapper">
+                <div className="ui embed">
+                    <iframe title="youtube player" src={`https://www.youtube.com/embed/${currentVideo.id.videoId}`} />
+                </div>
+            </div>
             <VideoDetails currentVideo={currentVideo} />
-        </div>
+        </main>
     );
 }
 
@@ -27,11 +29,13 @@ function CurrentVideo({ currentVideo, allVideos, searchCount, selectVideo }) {
     }, []);
 
     return (
-        <div>
-            // make sure currentVideo has a value before rendering it
-            { (Object.keys(currentVideo).length === 0) ? 'Please select a video' : <RenderVideo currentVideo={currentVideo} /> }
+        <div className="featured-video__container">      
+            { 
+                // make sure currentVideo has a value before rendering it
+                (Object.keys(currentVideo).length === 0) ? 'Please select a video' : <RenderVideo currentVideo={currentVideo} /> 
+            }
         </div>
-    )
+    );
 }
 
 const mapStateToProps = state => ({

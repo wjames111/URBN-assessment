@@ -14,10 +14,15 @@ function VideoList({ isLoading, allVideos, selectVideo }) {
 
 	return (
 		<div>
-			<h1>Video List</h1>
-            <h2>{ isLoading ? 'loading...' : 'not loading...' }</h2>
+            { 
+                isLoading ? 
+                <div className="ui active inverted dimmer">
+                    <div className="ui text loader">Loading</div>
+                </div> : 
+                null 
+            }
             <div className="ui relaxed divided list">
-                // Confirm video list has been recieved before rendering them
+                {/* Confirm video list has been recieved before rendering them */} 
                 { allVideos ? renderVideoItem : videoListErrMsg }
             </div>
 		</div>
