@@ -1,9 +1,5 @@
 @import 'variables';
 
-label {
-    display: none;
-}
-
 .search-bar__container.ui.segment {
     margin-bottom: $spacer-small;
     .search-bar__input {

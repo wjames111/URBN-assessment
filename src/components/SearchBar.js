@@ -31,8 +31,8 @@ function SearchBar(props) {
 	return (
 		<div className="search-bar__container ui segment">
             <form id="searchForm" onSubmit={(e) => onFormSubmit(e)}>
-                <div className="search-bar__content ui action input">
-                    <label htmlFor="videoSearch">
+                <div className="search-bar__content">
+                    <label htmlFor="videoSearch" className="ui action input">
                         <input
                             className="search-bar__input prompt"
                             id="videoSearch"
